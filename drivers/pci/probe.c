@@ -1234,8 +1234,9 @@ static int pci_scan_bridge_extend(struct pci_bus *bus, struct pci_dev *dev,
 	secondary = (buses >> 8) & 0xFF;
 	subordinate = (buses >> 16) & 0xFF;
 
-	pci_dbg(dev, "scanning [bus %02x-%02x] behind bridge, pass %d\n",
+	pci_dbg(dev, "NOT scanning [bus %02x-%02x] behind bridge, pass %d\n",
 		secondary, subordinate, pass);
+    return 0;
 
 	if (!primary && (primary != bus->number) && secondary && subordinate) {
 		pci_warn(dev, "Primary bus is hard wired to 0\n");

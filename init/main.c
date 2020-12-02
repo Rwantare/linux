@@ -1203,6 +1203,7 @@ int __init_or_module do_one_initcall(initcall_t fn)
 	if (initcall_blacklisted(fn))
 		return -EPERM;
 
+  pr_err("do one initcall %#llx\n", (unsigned long long) fn);
 	do_trace_initcall_start(fn);
 	ret = fn();
 	do_trace_initcall_finish(fn, ret);
@@ -1276,7 +1277,11 @@ static void __init do_initcall_level(int level, char *command_line)
 		   NULL, ignore_unknown_bootoption);
 
 	trace_initcall_level(initcall_level_names[level]);
-	for (fn = initcall_levels[level]; fn < initcall_levels[level+1]; fn++)
+	for (fn = initcall_levels[level]; fn < initcall_levels[level+1]; fn++){
+               pr_err("do initcall %p (%p)\n", fn, initcall_from_entry(fn));
+                do_one_initcall(initcall_from_entry(fn));
+       }
+       pr_err("Done do initcall level\n");
 		do_one_initcall(initcall_from_entry(fn));
 }
 

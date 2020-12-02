@@ -34,7 +34,7 @@ struct amd_hostbridge {
 static struct amd_hostbridge hb_probes[] __initdata = {
 	{ 0, 0x18, 0x1100 }, /* K8 */
 	{ 0, 0x18, 0x1200 }, /* Family10h */
-	{ 0xff, 0, 0x1200 }, /* Family10h */
+	// { 0xff, 0, 0x1200 }, /* Family10h */
 	{ 0, 0x18, 0x1300 }, /* Family11h */
 	{ 0, 0x18, 0x1600 }, /* Family15h */
 };
